@@ -1,4 +1,3 @@
-
 package try3;
 import java.util.ArrayList;
 import java.util.Date;
@@ -20,10 +19,7 @@ public class Venta {
         this.vendedor = vendedor;
         this.items = items;
     }
-  
 
-
-    public Vendedor getVendedor() { return vendedor; }
     public int getIdVenta() { return idVenta; }
     public Cliente getCliente() { return cliente; }
     public ArrayList<ItemVenta> getItems() { return items; }

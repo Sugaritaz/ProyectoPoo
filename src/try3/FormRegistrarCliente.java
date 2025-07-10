@@ -5,7 +5,7 @@ import javax.swing.plaf.basic.BasicInternalFrameUI;
 
 public class FormRegistrarCliente extends javax.swing.JInternalFrame {
 
-    GestorClientes gestorClientes;
+    private GestorClientes gestorClientes;
     private FormRealizarVenta ventanaVenta;
 
     public FormRegistrarCliente(GestorClientes gestorClientes, FormRealizarVenta ventanaVenta) {

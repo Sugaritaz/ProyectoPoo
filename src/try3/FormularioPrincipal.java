@@ -4,28 +4,27 @@ import org.netbeans.lib.awtextra.AbsoluteConstraints;
 import try3.FormVerProductos;
 
 public class FormularioPrincipal extends javax.swing.JFrame {
-    FormVerVentas ventanaVerVentas;
-    GestorVentas gestorVentas = new GestorVentas();
+
     private Inventario inventario;
+    
     FormRealizarVenta ventanaVenta;
     FormRegistrarCliente ventanaCliente;
     FormRegistrarProducto ventanaProducto;
     FormVerProductos ventanaVerProductos;
-    FormVerClientes ventanaVerClientes;
+    
 
     public FormularioPrincipal() {
         
         inventario = new Inventario();
         inventario.setProductos(DataManager.loadProductosFromXML("productos.xml"));
  GestorClientes gestor = new GestorClientes();
- ventanaVerClientes = new FormVerClientes(gestor);
+ 
 
         // Creación de las ventanas con el inventario
-       ventanaVenta = new FormRealizarVenta(inventario, gestor, gestorVentas);
+       ventanaVenta = new FormRealizarVenta(inventario, gestor);
         ventanaCliente = new FormRegistrarCliente(gestor, ventanaVenta);
         ventanaProducto = new FormRegistrarProducto(inventario);
         ventanaVerProductos = new FormVerProductos(inventario);
-        ventanaVerVentas = new FormVerVentas(gestorVentas);
 
         initComponents();
         this.setLocationRelativeTo(null);
@@ -50,8 +49,6 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         btnRegistrarProducto = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         jInternalFrame1 = new javax.swing.JInternalFrame();
-        btnVerCliente = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jdpPrincipal = new javax.swing.JDesktopPane();
 
         jButton1.setText("jButton1");
@@ -69,7 +66,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                 btnRealizarVentaActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRealizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 220, 130, 30));
+        jPanel1.add(btnRealizarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 130, 30));
 
         btnVerProducto.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
         btnVerProducto.setText("Ver Producto");
@@ -78,7 +75,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                 btnVerProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVerProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 130, 30));
+        jPanel1.add(btnVerProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 130, 30));
 
         btnRegistrarCliente.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
         btnRegistrarCliente.setText("Registrar Cliente");
@@ -87,7 +84,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                 btnRegistrarClienteActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 130, 30));
+        jPanel1.add(btnRegistrarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 130, 30));
 
         btnRegistrarProducto.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
         btnRegistrarProducto.setText("Registrar Producto");
@@ -96,7 +93,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                 btnRegistrarProductoActionPerformed(evt);
             }
         });
-        jPanel1.add(btnRegistrarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 130, 30));
+        jPanel1.add(btnRegistrarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 130, 30));
 
         btnSalir.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
         btnSalir.setText("Salir");
@@ -105,29 +102,11 @@ public class FormularioPrincipal extends javax.swing.JFrame {
                 btnSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 320, 130, 30));
+        jPanel1.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 260, 130, 30));
 
         jInternalFrame1.setVisible(true);
         jInternalFrame1.getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(jInternalFrame1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 0, 370, 378));
-
-        btnVerCliente.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
-        btnVerCliente.setText("Ver Cliente");
-        btnVerCliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVerClienteActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnVerCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 130, 30));
-
-        jButton2.setFont(new java.awt.Font("Franklin Gothic Demi", 0, 12)); // NOI18N
-        jButton2.setText("Ver Venta");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 270, 130, 30));
 
         jdpPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -185,6 +164,8 @@ public class FormularioPrincipal extends javax.swing.JFrame {
 
     private void btnVerProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerProductoActionPerformed
           closeVentanas();
+
+    // Crear una nueva ventana con los datos actualizados
     ventanaVerProductos = new FormVerProductos(inventario);
 
     jdpPrincipal.add(ventanaVerProductos, new AbsoluteConstraints(0, 0, ventanaVerProductos.getWidth(), ventanaVerProductos.getHeight()));
@@ -195,37 +176,10 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
-
-    private void btnVerClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerClienteActionPerformed
- closeVentanas();
-
-    // Por si quieres ver siempre la versión actualizada:
-    ventanaVerClientes = new FormVerClientes(ventanaCliente.gestorClientes); 
-
-    jdpPrincipal.add(ventanaVerClientes, new AbsoluteConstraints(
-        0, 0,
-        ventanaVerClientes.getWidth(),
-        ventanaVerClientes.getHeight()
-    ));
-    ventanaVerClientes.setVisible(true);        
-    }//GEN-LAST:event_btnVerClienteActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-         closeVentanas();
-
-    if (ventanaVerVentas.getParent() == null) {
-        jdpPrincipal.add(ventanaVerVentas, new AbsoluteConstraints(
-            0, 0,
-            ventanaVerVentas.getWidth(),
-            ventanaVerVentas.getHeight()
-        ));
-    }
-
-    ventanaVerVentas.actualizarTabla(); // 
-    ventanaVerVentas.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
                                    
-    
+    /**
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -254,7 +208,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormularioPrincipal().setVisible(true);
+                new LoginFrom().setVisible(true);
             }
         });
     }
@@ -264,10 +218,8 @@ public class FormularioPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton btnRegistrarCliente;
     private javax.swing.JButton btnRegistrarProducto;
     private javax.swing.JButton btnSalir;
-    private javax.swing.JButton btnVerCliente;
     private javax.swing.JButton btnVerProducto;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JDesktopPane jdpPrincipal;
