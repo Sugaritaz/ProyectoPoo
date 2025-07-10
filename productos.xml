@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<productos>
+    <producto>
+        <idProducto>1</idProducto>
+        <nombre>Mouse Logitech</nombre>
+        <categoria>Accesorios</categoria>
+        <precio>89.90</precio>
+        <stock>50</stock>
+        <marca>Logitech</marca>
+    </producto>
+    <producto>
+        <idProducto>2</idProducto>
+        <nombre>Teclado Redragon</nombre>
+        <categoria>Accesorios</categoria>
+        <precio>129.50</precio>
+        <stock>30</stock>
+        <marca>Redragon</marca>
+    </producto>
+</productos>
+
