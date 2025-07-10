@@ -4,15 +4,19 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameUI;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Date;
 
 public class FormRealizarVenta extends javax.swing.JInternalFrame {
 
     private Inventario inventario;
     private GestorClientes gestorClientes;
+    private GestorVentas gestorVentas;
 
-    public FormRealizarVenta(Inventario inventario, GestorClientes gestorClientes) {
+    public FormRealizarVenta(Inventario inventario, GestorClientes gestorClientes, GestorVentas gestorVentas) {
         this.inventario = inventario;
         this.gestorClientes = gestorClientes;
+        this.gestorVentas = gestorVentas;
 
         initComponents();
         cargarProductos();
@@ -28,14 +32,20 @@ public class FormRealizarVenta extends javax.swing.JInternalFrame {
             }
         });
     }
-    
-    // Este método se llama desde fuera para actualizar los clientes
+
     public void actualizarComboClientes() {
-    jcbCliente.removeAllItems();
-    for (Cliente c : gestorClientes.getClientes()) {
-        jcbCliente.addItem(c.getNombre());
+        jcbCliente.removeAllItems();
+        for (Cliente c : gestorClientes.getClientes()) {
+            jcbCliente.addItem(c.getNombre());
+        }
     }
-}
+
+    public void actualizarComboProductos() {
+        jcbProducto.removeAllItems();
+        for (Producto p : inventario.getProductos().values()) {
+            jcbProducto.addItem(p.getNombre());
+        }
+    }
 
     private void cargarProductos() {
         jcbProducto.removeAllItems();
@@ -50,50 +60,55 @@ public class FormRealizarVenta extends javax.swing.JInternalFrame {
             jcbCliente.addItem(c.getNombre());
         }
     }
- public void actualizarComboProductos() {
-    jcbProducto.removeAllItems();
-    for (Producto p : inventario.getProductos().values()) {
-        jcbProducto.addItem(p.getNombre());
-    }
-}
 
     private void realizarVenta() {
-    String productoNombre = (String) jcbProducto.getSelectedItem();
-    String clienteNombre = (String) jcbCliente.getSelectedItem();
-    String cantidadTexto = txtCantidad.getText().trim();
+        String productoNombre = (String) jcbProducto.getSelectedItem();
+        String clienteNombre = (String) jcbCliente.getSelectedItem();
+        String cantidadTexto = txtCantidad.getText().trim();
+        String vendedorNombre = txtVendedor.getText().trim();
 
-    if (productoNombre == null || clienteNombre == null || cantidadTexto.isEmpty()) {
-        JOptionPane.showMessageDialog(this, "Completa todos los campos.");
-        return;
-    }
-
-    try {
-        int cantidad = Integer.parseInt(cantidadTexto);
-        Producto producto = inventario.buscarProducto(productoNombre);
-
-        if (producto == null) {
-            JOptionPane.showMessageDialog(this, "Producto no encontrado.");
+        if (productoNombre == null || clienteNombre == null || cantidadTexto.isEmpty() || vendedorNombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Completa todos los campos.");
             return;
         }
 
-        if (cantidad <= 0) {
-            JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor que 0.");
-            return;
-        }
+        try {
+            int cantidad = Integer.parseInt(cantidadTexto);
+            Producto producto = inventario.buscarProducto(productoNombre);
 
-        if (producto.getStock() < cantidad) {
-            JOptionPane.showMessageDialog(this, "Stock insuficiente. Disponible: " + producto.getStock());
-        } else {
-            producto.setStock(producto.getStock() - cantidad);
-            JOptionPane.showMessageDialog(this, "Venta realizada a " + clienteNombre + ".\nNuevo stock: " + producto.getStock());
-            txtCantidad.setText("");
-            txtVendedor.setText("");
-        }
+            if (producto == null) {
+                JOptionPane.showMessageDialog(this, "Producto no encontrado.");
+                return;
+            }
 
-    } catch (NumberFormatException ex) {
-        JOptionPane.showMessageDialog(this, "Cantidad inválida.");
+            if (cantidad <= 0) {
+                JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor que 0.");
+                return;
+            }
+
+            if (producto.getStock() < cantidad) {
+                JOptionPane.showMessageDialog(this, "Stock insuficiente. Disponible: " + producto.getStock());
+            } else {
+                producto.setStock(producto.getStock() - cantidad);
+
+               Cliente cliente = gestorClientes.buscarCliente(clienteNombre);
+Vendedor vendedor = new Vendedor(vendedorNombre);
+
+ItemVenta item = new ItemVenta(producto, cantidad);
+ArrayList<ItemVenta> listaItems = new ArrayList<>();
+listaItems.add(item);
+
+Venta nuevaVenta = new Venta(0, new Date(), cliente, vendedor, listaItems);
+gestorVentas.registrarVenta(nuevaVenta);
+
+                JOptionPane.showMessageDialog(this, "Venta realizada a " + clienteNombre + ".\nNuevo stock: " + producto.getStock());
+                txtCantidad.setText("");
+                txtVendedor.setText("");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Cantidad inválida.");
+        }
     }
-}
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

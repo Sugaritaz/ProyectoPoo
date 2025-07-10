@@ -21,7 +21,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
  ventanaVerClientes = new FormVerClientes(gestor);
 
         // Creación de las ventanas con el inventario
-       ventanaVenta = new FormRealizarVenta(inventario, gestor);
+       ventanaVenta = new FormRealizarVenta(inventario, gestor, gestorVentas);
         ventanaCliente = new FormRegistrarCliente(gestor, ventanaVenta);
         ventanaProducto = new FormRegistrarProducto(inventario);
         ventanaVerProductos = new FormVerProductos(inventario);
@@ -207,12 +207,11 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         ventanaVerClientes.getWidth(),
         ventanaVerClientes.getHeight()
     ));
-    ventanaVerClientes.setVisible(true);        // TODO add your handling code here:
+    ventanaVerClientes.setVisible(true);        
     }//GEN-LAST:event_btnVerClienteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        closeVentanas();
-    ventanaVerVentas.actualizarTabla(); // actualiza datos si ya existía
+         closeVentanas();
 
     if (ventanaVerVentas.getParent() == null) {
         jdpPrincipal.add(ventanaVerVentas, new AbsoluteConstraints(
@@ -222,6 +221,7 @@ public class FormularioPrincipal extends javax.swing.JFrame {
         ));
     }
 
+    ventanaVerVentas.actualizarTabla(); // 
     ventanaVerVentas.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
                                    
