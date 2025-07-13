@@ -9,5 +9,6 @@ package try3;
  * @author stephano quevedo
  */
 public class FormLogin {
+    sout    "XD"
     
 }
