@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ventas>
+    <venta>
+        <cliente>dads</cliente>
+        <vendedor>sad</vendedor>
+        <items>
+            <item>
+                <producto>zamir</producto>
+                <cantidad>1</cantidad>
+                <subtotal>12.0</subtotal>
+            </item>
+        </items>
+    </venta>
+</ventas>

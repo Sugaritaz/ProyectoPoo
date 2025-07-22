@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<productos>
+    <producto>
+        <idProducto>1</idProducto>
+        <nombre>zamir</nombre>
+        <categoria>General</categoria>
+        <precio>12.0</precio>
+        <stock>7</stock>
+        <marca>MarcaX</marca>
+    </producto>
+</productos>
